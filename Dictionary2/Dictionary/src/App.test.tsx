@@ -27,26 +27,50 @@ describe('searching for words functionality', () => {
     const errorMessage = screen.getByText('Please enter a word');
     expect(errorMessage).toBeInTheDocument();
   });
-  test.only('should render a list of words when user searches for a word', async () => {
+  test('should render a list of words when user searches for a word', async () => {
     render(<App />);
-     //Find input elem
+    //Find input elem
     const inputElement = screen.getByRole('textbox');
     expect(inputElement).toBeInTheDocument();
     //simulate typing word into input field
     await act(async () => {
-      fireEvent.change(inputElement, { target: { value: 'kitten' } })
+      fireEvent.change(inputElement, { target: { value: 'kitten' } });
+    });
+    expect((inputElement as HTMLInputElement).value).toBe('kitten');
+
+    //find the search button and click it
+    const searchBtn = screen.getByRole('button', { name: 'Search' });
+    expect(searchBtn).toBeInTheDocument();
+
+    await act(async () => {
+      searchBtn.click();
+    });
+
+    //check that word(list) is rendered
+    await screen.findByText('kitten');
   });
-  expect((inputElement as HTMLInputElement).value).toBe('kitten');
-
-  //find the search button and click it
-  const searchBtn = screen.getByRole('button', { name: 'Search' });
-  expect(searchBtn).toBeInTheDocument();
-
-  await act(async () => {
-    searchBtn.click();
-  });
-
-  //check that word(list) is rendered
-  await screen.findByText('kitten');
 });
+
+describe('adding and deleting words to/from favorites', () => {
+  test('add word to favorites', async () => {
+    render(<App />);
+    //Find input elem
+    const inputElement = screen.getByRole('textbox');
+    expect(inputElement).toBeInTheDocument();
+    //simulate typing word into input field
+    await act(async () => {
+      fireEvent.change(inputElement, { target: { value: 'kitten' } });
+    });
+    expect((inputElement as HTMLInputElement).value).toBe('kitten');
+    const searchBtn = screen.getByRole('button', { name: 'Search' });
+    expect(searchBtn).toBeInTheDocument();
+
+    await act(async () => {
+      searchBtn.click();
+    });
+
+    //check that word(list) is rendered
+    await screen.findByText('kitten');
+    await screen.findByText('Add to favorites');
+  });
 });
