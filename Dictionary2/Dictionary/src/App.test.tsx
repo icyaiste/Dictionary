@@ -1,6 +1,5 @@
-import { test, expect, vi } from 'vitest';
 import App from './App';
-import { render, screen, waitFor, act } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 
 test('should render headline, input field and a search button upon loading', () => {
   render(<App />);
