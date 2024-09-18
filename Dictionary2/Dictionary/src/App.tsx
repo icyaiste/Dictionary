@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import WordList from './components/WordList/WordList';
 import { Word } from './components/interfaces/interfaceWordList';
@@ -36,13 +36,28 @@ function App() {
   };
 
   const addToFavorites = (word: Word) => {
-    if (!favorites.includes(word)) {
-      setFavorites([...favorites, word]);
+    const existingFavorites = [...favorites]; //creating a shallow copy of the existing favorites
+
+    // Check if the word is already in favorites before adding it
+    if (!existingFavorites.find((favorite) => favorite.word === word.word)) {//if word from curent favorites is not found in existing favorites
+      const updatedFavorites = [...existingFavorites, word]; //add the new word to the existing favorites(creating a new array that includes all existing favorites plus the new word)
+      setFavorites(updatedFavorites); //update the state with the new favorites list
+
+       // Save the updated favorites list(whenever new word is added) to sessionStorage
+       sessionStorage.setItem('favorites', JSON.stringify(updatedFavorites)); 
+      }
+  };
+
+  // Load favorites from sessionStorage when the component mounts
+  useEffect(() => {
+    const storedFavorites = sessionStorage.getItem('favorites'); //get the favorites from sessionStorage
+    if (storedFavorites) { //if favorites were found in sessionStorage
+      setFavorites(JSON.parse(storedFavorites)); //Load the favorites to the state
     }
-  }
+  }, []);
 
   return (
-    <>
+    <main>
       <header>
         <h1>Dictionary app</h1>
       </header>
@@ -60,7 +75,7 @@ function App() {
         {!inputValue && <p style={{ color: 'red' }}>{error}</p>}
         <Favorites favorites={favorites}/>
       </main>
-    </>
+    </main>
   );
 }
 
