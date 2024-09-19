@@ -16,7 +16,7 @@ function WordList({ words, addToFavorites }: WordListProps) {
             <div>
               <p>Phonetic: {word.phonetics[0].text}</p>
               {word.phonetics[0].audio && (
-                <audio controls>
+                <audio controls role="application">
                   <source src={word.phonetics[0].audio} type="audio/mpeg" />
                   {/*Your browser does not support the audio element.*/}
                 </audio>
