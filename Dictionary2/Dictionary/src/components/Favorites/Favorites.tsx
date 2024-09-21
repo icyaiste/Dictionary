@@ -2,10 +2,10 @@ import { Word } from '../interfaces/interfaceWordList';
 
 interface FavoritesProps {
   favorites: Word[];
+  removeFromFavorites: (word: Word) => void;
 }
 
-function Favorites({ favorites }: FavoritesProps) {
-    
+function Favorites({ favorites, removeFromFavorites }: FavoritesProps) {
   return (
     <div>
       <h2>Favorites</h2>
@@ -31,6 +31,7 @@ function Favorites({ favorites }: FavoritesProps) {
               </ul>
             </div>
           ))}
+          <button onClick={() => removeFromFavorites(word)}>Delete</button>
         </div>
       ))}
     </div>

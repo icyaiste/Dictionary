@@ -34,7 +34,7 @@ function WordList({ words, addToFavorites }: WordListProps) {
           {/* Render meanings */}
           {word.meanings.map((meaning, idx) => (
             <article key={idx}>
-              <h3>Part of Speech: {meaning.partOfSpeech}</h3>
+              <strong>Part of Speech: {meaning.partOfSpeech}</strong>
               <ul>
                 {meaning.definitions.map((definition, defIndex) => (
                   <li key={defIndex}>
