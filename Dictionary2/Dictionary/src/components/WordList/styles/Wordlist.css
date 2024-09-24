@@ -1,0 +1,73 @@
+.wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.wordInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.word {
+  font-family: 'Work Sans';
+  font-weight: 900;
+  font-style: italic;
+  text-transform: lowercase;
+  font-size: 2em;
+  margin-bottom: 0;
+}
+
+.phoneticsWrap {
+  margin-top: 0;
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.phonetic {
+  margin-top: 0;
+}
+
+.audio {
+  color-scheme: dark;
+}
+
+.topBox {
+  display: flex;
+  margin: 0 0 20px 0;
+  align-items: center;
+  justify-content: space-between;
+  width: 220px;
+  font-family: 'Arial';
+}
+
+.definitionsWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* margin-left: 20px; */
+  margin-bottom: 20px;
+  font-family: 'Work Sans';
+  font-weight: 400;
+}
+
+.partOfSpeech {
+  font-family: 'Work Sans';
+  font-weight: 300;
+  font-size: 18px;
+  margin-bottom: 0;
+  text-transform: uppercase;
+}
+
+.definitions,
+.definitions p,
+ul {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 1px;
+  padding: 0;
+}

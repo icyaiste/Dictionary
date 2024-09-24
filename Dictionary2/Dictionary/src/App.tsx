@@ -70,16 +70,16 @@ function App() {
   return (
     <main>
       <header>
-        <h1>Dictionary app</h1>
+        <h1 className='title'>Dictionary app</h1>
       </header>
       <main>
-        <input
+        <input className='input'
           type="text"
           value={inputValue}
           onChange={handleSearch}
           placeholder="Search for a word"
         />
-        <button onClick={fetchWords}>Search</button>
+        <button className='search' onClick={fetchWords}>Search</button>
         {/* Render WordList and pass wordData as props */}
         {words.length > 0 && (
           <WordList words={words} addToFavorites={addToFavorites} />

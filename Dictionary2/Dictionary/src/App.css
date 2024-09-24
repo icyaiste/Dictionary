@@ -1,42 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
   text-align: center;
+  background-color: #fed21e;
+  color: black;
+  font-family:Arial, Helvetica, sans-serif;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.title {
+  font-size: 3em;
+  font-family: 'Work Sans';
+  font-weight: 900;
+  letter-spacing: 1px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.input, .search{
+  margin: 20PX 10px 0px 0;
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 5px;
+  background-color:#484848;
+  border-radius: 25px;
+  border: none;
+  font-family: 'Work Sans';
+  font-weight: 200;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.search {
+ color: white;
+ margin-left: 0;
+ font-size: 18px;
+ font-family: 'Work Sans';
+ font-weight: 400;
+ padding: 10px 20px;
 }
 
-.card {
-  padding: 2em;
-}
 
-.read-the-docs {
-  color: #888;
-}
