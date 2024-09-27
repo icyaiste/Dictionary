@@ -1,39 +1,65 @@
-import { render, screen, fireEvent, act } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { setupServer } from 'msw/node';
+import { http, HttpResponse } from 'msw';
 import App from '../../App';
 
-test('does not render phonetics when they are not available', async () => {
-  //Mock the fetch function
-  const mockFetch = vi.fn().mockResolvedValueOnce({
-    ok: true,
-    json: async () => [
+const server = setupServer(
+  http.get('https://api.dictionaryapi.dev/api/v2/entries/en/latino', () =>
+    HttpResponse.json([
       {
         word: 'latino',
-        meanings: [],
-        phonetics: [], // No written phonetics or audio in the response
+        phonetics: [],
+        meanings: [
+          {
+            partOfSpeech: 'noun',
+            definitions: [
+              {
+                definition:
+                  '(chiefly US) A person, especially and usually (interpreted as) a male, from Latin America, a Hispanic person. (Compare Latina.)',
+                synonyms: [],
+                antonyms: [],
+                example:
+                  'Latinos have quickly become the largest ethnic minority in the United States.',
+              },
+            ],
+            synonyms: [],
+            antonyms: [],
+          },
+        ],
+        license: {
+          name: 'CC BY-SA 3.0',
+          url: 'https://creativecommons.org/licenses/by-sa/3.0',
+        },
+        sourceUrls: [
+          'https://en.wiktionary.org/wiki/Latino',
+          'https://en.wiktionary.org/wiki/latino',
+        ],
       },
-    ],
-  });
-  global.fetch = mockFetch; //replace fetch with mockFetch
+    ])
+  )
+);
 
+beforeAll(() => server.listen());
+
+afterAll(() => server.close());
+
+
+
+test('does not render phonetics when they are not available', async () => {
+  const user = userEvent.setup();
   render(<App />);
 
   //Find input elem
   const inputElement = screen.getByRole('textbox');
-  expect(inputElement).toBeInTheDocument();
 
   //simulate typing word into input field
-  await act(async () => {
-    fireEvent.change(inputElement, { target: { value: 'latino' } });
-  });
+  await user.type(inputElement, 'latino');
   expect((inputElement as HTMLInputElement).value).toBe('latino');
 
   //find the search button and click it
   const searchBtn = screen.getByRole('button', { name: 'Search' });
-  expect(searchBtn).toBeInTheDocument();
-
-  await act(async () => {
-    searchBtn.click();
-  });
+  await user.click(searchBtn);
 
   //check that word is rendered
   await screen.findByText('latino');
