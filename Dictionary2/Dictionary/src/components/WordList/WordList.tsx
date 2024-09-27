@@ -1,4 +1,5 @@
 import { Word } from '../interfaces/interfaceWordList';
+import './styles/Wordlist.css';
 
 interface WordListProps {
   words: Word[];
@@ -14,7 +15,9 @@ function WordList({ words, addToFavorites }: WordListProps) {
           {/* Render phonetics */}
           {word.phonetics && word.phonetics.length > 0 && (
             <div>
-              <p>Phonetic: {word.phonetics[0].text}</p>
+              <p>
+                Phonetic: <span>{word.phonetics[0].text}</span>
+              </p>
               {word.phonetics[0].audio && (
                 <audio controls role="application">
                   <source src={word.phonetics[0].audio} type="audio/mpeg" />
@@ -22,13 +25,6 @@ function WordList({ words, addToFavorites }: WordListProps) {
                 </audio>
               )}
             </div>
-          )}
-
-          {/* Render origin if available */}
-          {word.origin && (
-            <p>
-              <strong>Origin:</strong> {word.origin}
-            </p>
           )}
 
           {/* Render meanings */}
