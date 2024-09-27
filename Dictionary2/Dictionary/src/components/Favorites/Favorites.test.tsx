@@ -87,7 +87,7 @@ describe('adding and deleting words to/from favorites', () => {
       expect(addedFavoriteWord[0]).toBeInTheDocument();
     });
   
-<<<<<<< HEAD
+    
     test('delete word from favorites', async () => {
       const user = userEvent.setup();
       render(<App />);

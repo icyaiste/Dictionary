@@ -205,3 +205,15 @@ describe('audiofiles availability', () => {
     expect(audioElement).not.toBeInTheDocument();
   });
 });
+
+test('should change theme when theme button is clicked', async () => {
+  const user = userEvent.setup();
+  render(<App />);
+
+  // Find the theme button and click it
+  const themeButton = screen.getByRole('button', { name: 'Theme' });
+  await user.click(themeButton);
+
+  // Check that the theme has changed
+  expect(document.documentElement.className).toBe('theme-dark');
+});

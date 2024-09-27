@@ -11,6 +11,7 @@ function App() {
   const [inputValue, setInputValue] = useState<string>('');
   const [error, setError] = useState<string>('');
   const [favorites, setFavorites] = useState<Word[]>([]);
+  const [theme, setTheme] = useState<string>('');
 
   const fetchWords = async () => {
     if (!inputValue) {
@@ -67,25 +68,45 @@ function App() {
     sessionStorage.setItem('favorites', JSON.stringify(updatedFavorites));
   };
 
+  function changeTheme() {
+    const currentTheme = localStorage.getItem('theme'); //get the current theme from localStorage
+    const newTheme =
+      currentTheme === 'theme-dark' ? 'theme-light' : 'theme-dark'; //if current theme is dark, change to light and vice versa
+    localStorage.setItem('theme', newTheme); //save the new theme to localStorage
+    document.documentElement.className = newTheme; // Apply the theme class to the root element
+    setTheme(newTheme); //update the state with the new theme
+  }
+
+  useEffect(() => {
+    document.documentElement.className = theme;
+  }, [theme]);
+
+
   return (
-    <main>
+    <main className="pageWrapper">
       <header>
-        <h1 className='title'>Dictionary app</h1>
+        <button className="themeBtn" onClick={changeTheme}>
+          Theme
+        </button>
+        <h1 className="title">Dictionary app</h1>
       </header>
       <main>
-        <input className='input'
+        <input
+          className="input"
           type="text"
           value={inputValue}
           onChange={handleSearch}
           placeholder="Search for a word"
         />
-        <button className='search' onClick={fetchWords}>Search</button>
+        <button className="search" onClick={fetchWords}>
+          Search
+        </button>
+        {/* Render error message if user tries to search with empty input field*/}
+        {!inputValue && <p style={{ color: 'red' }}>{error}</p>}
         {/* Render WordList and pass wordData as props */}
         {words.length > 0 && (
           <WordList words={words} addToFavorites={addToFavorites} />
         )}
-        {/* Render error message if user tries to search with empty input field*/}
-        {!inputValue && <p style={{ color: 'red' }}>{error}</p>}
         <Favorites
           favorites={favorites}
           removeFromFavorites={removeFromFavorites}
