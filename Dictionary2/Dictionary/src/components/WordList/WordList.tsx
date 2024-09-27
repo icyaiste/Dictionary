@@ -1,6 +1,6 @@
 import { Word } from '../interfaces/interfaceWordList';
 import './styles/Wordlist.css';
-
+import starIcon from './styles/star.png';
 interface WordListProps {
   words: Word[];
   addToFavorites: (word: Word) => void;
@@ -8,10 +8,18 @@ interface WordListProps {
 
 function WordList({ words, addToFavorites }: WordListProps) {
   return (
-    <section>
+    <section className="wordListComponent">
       {words.map((word, index) => (
         <article key={index}>
-          <h2>{word.word}</h2>
+          <div className="favBox">
+            <button
+              className="favoriteButton"
+              onClick={() => addToFavorites(word)}
+            >
+              <img src={starIcon} alt="Add to favorites" className="starIcon" />
+            </button>
+            <h2>{word.word}</h2>
+          </div>
           {/* Render phonetics */}
           {word.phonetics && word.phonetics.length > 0 && (
             <div>
@@ -30,24 +38,16 @@ function WordList({ words, addToFavorites }: WordListProps) {
           {/* Render meanings */}
           {word.meanings.map((meaning, idx) => (
             <article key={idx}>
-              <strong>Part of Speech: {meaning.partOfSpeech}</strong>
+              <p className="partOfSpeech">{meaning.partOfSpeech}</p>
               <ul>
                 {meaning.definitions.map((definition, defIndex) => (
                   <li key={defIndex}>
-                    <p>
-                      <strong>Definition:</strong> {definition.definition}
-                    </p>
-                    {definition.example && (
-                      <p>
-                        <strong>Example:</strong> {definition.example}
-                      </p>
-                    )}
+                    <p>{definition.definition}</p>
                   </li>
                 ))}
               </ul>
             </article>
           ))}
-          <button onClick={() => addToFavorites(word)}>Add to favorites</button>
         </article>
       ))}
     </section>

@@ -1,0 +1,28 @@
+.favoritesComponent{
+    width: 400px;
+    margin-left: auto;
+    margin-right: 40px;
+    padding: 40px 20px 60px 40px;
+    border: 1px solid white;
+    border-radius: 25px;
+}
+
+h3{
+    margin: 0;
+}
+
+.deleteIcon{
+    width: 30px;
+    color: var(--text);
+    margin-left: 10px;
+}
+
+.deleteBox{
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
+}
+
+ul p{
+    margin: 2px;
+}

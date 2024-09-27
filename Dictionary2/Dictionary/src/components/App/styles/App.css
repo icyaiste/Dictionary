@@ -1,24 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root{
-  --background: #fed21e;
+  --background: #483239;
   --text: #000;
-  --input: #fff;
-  --search: #fff;
+  --input: #FDECEF;
+  --searchBtn: #FDECEF;
 }
 
 .theme-light {
-  --background: #fed21e;
+  --background: #483239;
   --text: #000;
-  --input: #fff;
-  --search: #fff;
+  --input: #FDECEF;
+  --searchBtn: #FDECEF;
 }
 
 .theme-dark {
   --background: black;
   --text: #fff;
   --input: #484848; 
-  --search: #484848;
+  --searchBtn: #484848;
 }
 
 #root {
@@ -36,10 +36,12 @@
   align-items: center;
 }
 
-header {
+.header {
   display: flex;
   flex-direction: row;
   align-items: center;
+  width: 100%;
+  justify-content: center;
 }
 
 .title {
@@ -47,29 +49,54 @@ header {
   font-family: 'Work Sans';
   font-weight: 900;
   letter-spacing: 1px;
+  max-width: 400px;
 }
 
 .themeBtn {
-  margin-right: auto;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 10px;
+  background-color: var(--background);
+  margin-right: 10px;
+}
+
+.themeIcon{
+  width: 30px;
 }
 
 .input,
-.search {
+.searchBtn {
   margin: 20px 10px 0px 0;
   padding: 10px;
   font-size: 18px;
   background-color: var(--background);
-  border: #000 1px solid;
+  border: 1px solid var(--text);
   color: var(--text);
   border-radius: 25px;
   font-family: 'Work Sans';
   font-weight: 300;
 }
 
-.search {
+.searchBtn {
   background-color: var(--background);
   color: var(--text);
   margin-left: 0;
   font-weight: 400;
   padding: 10px 20px;
+}
+
+.mainBlocks{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.search{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 60px;
 }
