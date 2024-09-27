@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { setupServer } from 'msw/node';
 import { http, HttpResponse } from 'msw';
-import App from '../../App';
+import App from '../App/App';
 
 const server = setupServer(
   http.get('https://api.dictionaryapi.dev/api/v2/entries/en/latino', () =>
@@ -43,8 +43,6 @@ const server = setupServer(
 beforeAll(() => server.listen());
 
 afterAll(() => server.close());
-
-
 
 test('does not render phonetics when they are not available', async () => {
   const user = userEvent.setup();

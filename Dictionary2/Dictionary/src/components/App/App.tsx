@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import './App.css';
-import WordList from './components/WordList/WordList';
-import { Word } from './components/interfaces/interfaceWordList';
-import Favorites from './components/Favorites/Favorites';
+import './styles/App.css';
+import WordList from '../WordList/WordList';
+import { Word } from '../interfaces/interfaceWordList';
+import Favorites from '../Favorites/Favorites';
+import themeIcon from './styles/theme.png';
 
 const BAS_URL = 'https://api.dictionaryapi.dev/api/v2/entries/en/';
 
@@ -81,16 +82,15 @@ function App() {
     document.documentElement.className = theme;
   }, [theme]);
 
-
   return (
     <main className="pageWrapper">
-      <header>
+      <header className="header">
         <button className="themeBtn" onClick={changeTheme}>
-          Theme
+          <img src={themeIcon} alt="change theme" className="themeIcon" />
         </button>
         <h1 className="title">Dictionary app</h1>
       </header>
-      <main>
+      <section className="search">
         <input
           className="input"
           type="text"
@@ -98,12 +98,14 @@ function App() {
           onChange={handleSearch}
           placeholder="Search for a word"
         />
-        <button className="search" onClick={fetchWords}>
+        <button className="searchBtn" onClick={fetchWords}>
           Search
         </button>
-        {/* Render error message if user tries to search with empty input field*/}
-        {!inputValue && <p style={{ color: 'red' }}>{error}</p>}
-        {/* Render WordList and pass wordData as props */}
+      </section>
+      {/* Render error message if user tries to search with empty input field*/}
+      {!inputValue && <p style={{ color: 'red' }}>{error}</p>}
+      {/* Render WordList and pass wordData as props */}
+      <div className="mainBlocks">
         {words.length > 0 && (
           <WordList words={words} addToFavorites={addToFavorites} />
         )}
@@ -111,7 +113,7 @@ function App() {
           favorites={favorites}
           removeFromFavorites={removeFromFavorites}
         />
-      </main>
+      </div>
     </main>
   );
 }

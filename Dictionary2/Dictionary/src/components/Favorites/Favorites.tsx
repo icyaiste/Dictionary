@@ -1,4 +1,7 @@
 import { Word } from '../interfaces/interfaceWordList';
+import './styles/Favorites.css';
+import starIcon from './styles/icons/star.png';
+import deleteIcon from './styles/icons/delete.png';
 
 interface FavoritesProps {
   favorites: Word[];
@@ -7,31 +10,38 @@ interface FavoritesProps {
 
 function Favorites({ favorites, removeFromFavorites }: FavoritesProps) {
   return (
-    <div>
-      <h2>Favorites</h2>
+    <div className="favoritesComponent">
+      <div className="favBox">
+        <button className="favoriteButton">
+          <img src={starIcon} alt="Add to favorites" className="starIcon" />
+        </button>
+        <h2>Favorites</h2>
+      </div>
       {/* Render favorite words here */}
       {favorites.map((word, index) => (
         <div key={index}>
-          <h3>{word.word}</h3>
+          <div className="deleteBox">
+            <h3>{word.word}</h3>
+            <button
+              className="favoriteButton"
+              onClick={() => removeFromFavorites(word)}
+            >
+              <img
+                src={deleteIcon}
+                alt="delete frpm favorites"
+                className="deleteIcon"
+              />
+            </button>
+          </div>
           {word.meanings.map((meaning, idx) => (
             <div key={idx}>
               <ul>
                 {meaning.definitions.map((definition, defIndex) => (
-                  <li key={defIndex}>
-                    <p>
-                      <strong>Definition:</strong> {definition.definition}
-                    </p>
-                    {definition.example && (
-                      <p>
-                        <strong>Example:</strong> {definition.example}
-                      </p>
-                    )}
-                  </li>
+                  <p key={defIndex}>{definition.definition}</p>
                 ))}
               </ul>
             </div>
           ))}
-          <button onClick={() => removeFromFavorites(word)}>Delete</button>
         </div>
       ))}
     </div>
