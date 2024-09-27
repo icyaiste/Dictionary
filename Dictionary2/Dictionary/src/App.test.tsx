@@ -81,10 +81,9 @@ describe('searching for words functionality', () => {
     //find the search button and click it without typing anything in the input field
     const searchButton = screen.getByRole('button', { name: 'Search' });
     expect(searchButton).toBeInTheDocument();
-
-    //click the search button
     await user.click(searchButton);
 
+    //check that error message is rendered
     const errorMessage = screen.getByText('Please enter a word');
     expect(errorMessage).toBeInTheDocument();
   });
